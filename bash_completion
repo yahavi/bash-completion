@@ -146,7 +146,7 @@ quote()
 quote_readline()
 {
     local quoted
-    _quote_readline_by_ref "$1" ret
+    _quote_readline_by_ref "${1-}" ret
     printf %s "$ret"
 } # quote_readline()
 
@@ -233,7 +233,7 @@ _upvars()
 #
 __reassemble_comp_words_by_ref()
 {
-    local exclude i j line ref
+    local exclude="" i j line ref
     # Exclude word separator characters?
     if [[ $1 ]]; then
         # Yes, exclude word separator characters;
@@ -242,7 +242,7 @@ __reassemble_comp_words_by_ref()
     fi
 
     # Default to cword unchanged
-    printf -v "$3" %s "$COMP_CWORD"
+    printf -v "$3" %s "${COMP_CWORD-}"
     # Are characters excluded which were former included?
     if [[ $exclude ]]; then
         # Yes, list of word completion separators has shrunk;
@@ -560,7 +560,7 @@ _filedir()
 
     _tilde "$cur" || return 0
 
-    local -a toks
+    local -a toks=()
     local x tmp
 
     x=$( compgen -d -- "$cur" ) &&
@@ -568,7 +568,7 @@ _filedir()
         toks+=( "$tmp" )
     done <<< "$x"
 
-    if [[ "$1" != -d ]]; then
+    if [[ "${1-}" != -d ]]; then
         local quoted
         _quote_readline_by_ref "$cur" quoted
 
@@ -581,7 +581,7 @@ _filedir()
         done <<< "$x"
 
         # Try without filter if it failed to produce anything and configured to
-        [[ -n ${COMP_FILEDIR_FALLBACK:-} && -n "$1" && ${#toks[@]} -lt 1 ]] && \
+        [[ -n ${COMP_FILEDIR_FALLBACK-} && "${1-}" && ${#toks[@]} -lt 1 ]] && \
             x=$( compgen -f -- $quoted ) &&
             while read -r tmp; do
                 toks+=( "$tmp" )
@@ -1012,7 +1012,7 @@ _tilde()
 __expand_tilde_by_ref()
 {
     # Does $1 start with tilde (~)?
-    if [[ ${!1} == \~* ]]; then
+    if [[ ${!1-} == \~* ]]; then
         # Does $1 contain slash (/)?
         if [[ ${!1} == */* ]]; then
             # Yes, $1 contains slash;
@@ -1375,7 +1375,7 @@ _get_first_arg()
 _count_args()
 {
     local i cword words
-    __reassemble_comp_words_by_ref "$1" words cword
+    __reassemble_comp_words_by_ref "${1-}" words cword
 
     args=1
     for i in "${words[@]:1:cword-1}"; do
