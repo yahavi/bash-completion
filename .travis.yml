@@ -1,7 +1,7 @@
 language: bash
 
 os:
-  - linux
+  - osx
   # Not working yet (test suite somehow screwed): - osx
 
 addons:
@@ -165,6 +165,8 @@ script:
   - make -C completions check
   - cd test
   - export PATH="/usr/bin:$PATH"  # avoid Travis default ri etc
-  - ./runCompletion --all
-  - ./runInstall --all
-  - ./runUnit --all
+  - ./runCompletion --debug 2to3.exp aclocal.exp
+  - cat dbg.log
+  #- ./runCompletion --all
+  #- ./runInstall --all
+  #- ./runUnit --all
