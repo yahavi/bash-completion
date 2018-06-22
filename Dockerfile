@@ -12,7 +12,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         python3-setuptools \
     && rm -r /var/lib/apt/lists/* \
     && export MAKEFLAGS=-j$(nproc) \
-    && cpanm Perl::Critic \
+    && cpanm --notest Perl::Critic \
     && rm -r /root/.cpanm \
     && pip3 install flake8 flake8-bugbear \
     && rm -r /root/.cache/pip \
