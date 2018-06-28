@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM python:latest
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update && apt-get -y upgrade \
@@ -8,8 +8,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         libc6-dev \
         linux-libc-dev \
         make \
-        python3-pip \
-        python3-setuptools \
     && rm -r /var/lib/apt/lists/* \
     && export MAKEFLAGS=-j$(nproc) \
     && cpanm --notest Perl::Critic \
