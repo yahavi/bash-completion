@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3-slim
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update && apt-get -y upgrade \
