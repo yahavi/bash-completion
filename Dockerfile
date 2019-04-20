@@ -10,7 +10,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         make \
     && rm -r /var/lib/apt/lists/* \
     && export MAKEFLAGS=-j$(nproc) \
-    && cpanm --notest Perl::Critic \
+    && cpanm --notest Perl::Critic Perl::Tidy \
     && rm -r /root/.cpanm \
     && pip3 install black flake8 flake8-bugbear \
     && rm -r /root/.cache/pip \
