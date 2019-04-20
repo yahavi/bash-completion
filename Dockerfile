@@ -12,7 +12,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && export MAKEFLAGS=-j$(nproc) \
     && cpanm --notest Perl::Critic \
     && rm -r /root/.cpanm \
-    && pip3 install flake8 flake8-bugbear \
+    && pip3 install black flake8 flake8-bugbear \
     && rm -r /root/.cache/pip \
     && mkdir /work
 
