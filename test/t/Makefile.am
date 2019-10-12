@@ -268,6 +268,7 @@ EXTRA_DIST = \
 	test_javac.py \
 	test_javadoc.py \
 	test_javaws.py \
+	test_jfrog.py \
 	test_jpegoptim.py \
 	test_jps.py \
 	test_jq.py \

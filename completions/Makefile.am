@@ -189,6 +189,7 @@ bashcomp_DATA = 2to3 \
 		jarsigner \
 		java \
 		javaws \
+		jfrog \
 		jq \
 		jpegoptim \
 		jps \
